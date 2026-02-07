@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at bottom, #020111 0%, #000000 80%);
+      overflow: hidden;
+      font-family: Georgia, serif;
+      color: #ffd6e8;
+    }
+
+    .instruction {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      opacity: 0.7;
+    }
+
+    .rose {
+      position: absolute;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #ff4d6d;
+      text-shadow: 0 0 10px rgba(255,77,109,0.8);
+      transition: transform 0.5s, opacity 0.5s;
+    }
+
+    .rose:hover {
+      transform: scale(1.3);
+    }
+
+    .message {
+      position: absolute;
+      bottom: 15%;
+      width: 100%;
+      text-align: center;
+      font-size: 1.6em;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="instruction">
+    Click a star.
+  </div>
+
+  <div class="message" id="message"></div>
+
+  <script>
+    const messages = [
+      "My Future Husband, Kabir... This is Tara 🫦",
+      "The things I never say out loud, someday I might",
+      "Every vein and capillary in my body has learned your name.",
+      "Our Love will survive forever",
+      "You stayed, every time."
+    ];
+
+    const messageBox = document.getElementById("message");
+
+    function createRose() {
+      const rose = document.createElement("div");
+      rose.classList.add("rose");
+      rose.innerText = "🌹";
+
+      rose.style.left = Math.random() * 100 + "vw";
+      rose.style.top = Math.random() * 100 + "vh";
+
+      rose.onclick = () => {
+        const text = messages[Math.floor(Math.random() * messages.length)];
+        messageBox.innerText = text;
+        messageBox.style.opacity = 1;
+
+        rose.style.opacity = 0;
+        setTimeout(() => rose.remove(), 500);
+      };
+
+      document.body.appendChild(rose);
+    }
+
+    for (let i = 0; i < 20; i++) {
+      createRose();
+    }
+  </script>
+
+</body>
+</html>
